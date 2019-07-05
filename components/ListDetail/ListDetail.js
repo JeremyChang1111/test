@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet, TouchableOpacity, WebView, Modal, TouchableHighlight } from 'react-native';
+import { Modal, View, Image, StyleSheet, TouchableOpacity, WebView } from 'react-native'
+import { Text, Button } from 'react-native-ui-kitten'
+import moment from 'moment'
 
 class ListDetail extends React.Component {
     state = {
@@ -30,26 +32,21 @@ class ListDetail extends React.Component {
         }
 
         return (
-            <TouchableOpacity style = {styles.container} onPress={this.onPressItem}>
+            <TouchableOpacity style={styles.container} onPress={this.onPressItem}>
                 <Modal
-                    animationType="slide"
-                    transparent={false}
                     visible={this.state.modalVisible}
+                    animationType='fade'
+                    animationDuration={600}
                 >
-                    <TouchableHighlight
-                        style={styles.webContainer}
-                        onPress={this.onModalClose}
-                    >
-                        <Text style={styles.close}>Close</Text>
-                    </TouchableHighlight>
+                    <Button title='Close Modal' onPress={this.onModalClose}/>
                     <WebView source={this.state.postURL}/>
                 </Modal>
                 <View style={styles.avatarContainer}>
                     <Image style={styles.avatar} source={imageURL}/>
                 </View>
                 <View style={styles.contentContainer}>
-                    <View style={styles.date}><Text>{'2019/7/4'}</Text></View>
-                    <View style={styles.title}><Text style={styles.title}>{data.title}</Text></View>
+                    <View style={styles.date}><Text>{moment().format('YYYY-MM-DD')}</Text></View>
+                    <View style={styles.title}><Text style={styles.title} category='h5'>{data.title}</Text></View>
                     <View style={styles.infoSection}>
                         <View style={styles.infoItem}><Text>{ data.author }</Text></View>
                         <View style={styles.infoItem}><Text>{ data.score }</Text></View>

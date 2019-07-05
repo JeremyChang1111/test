@@ -4,7 +4,6 @@ import { actionTypes } from '../actions'
 
 function* fetchList() {
     try {
-        console.log('fetch test');
         const res = yield call(axios.get, 'https://api.reddit.com/r/pics/hot.json')
         yield put({ type: actionTypes.GET_LIST_SUCCESS, payload: res.data })
     } catch(error) {

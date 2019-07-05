@@ -8,6 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 import store from './store'
 import AppNavigator from './navigation/AppNavigator';
+import { mapping, light as lightTheme } from '@eva-design/eva' 
+import { ApplicationProvider } from 'react-native-ui-kitten';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -22,12 +24,17 @@ export default function App(props) {
     );
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <Provider store={store}>
-          <AppNavigator />
-        </Provider>
-      </View>
+      <ApplicationProvider 
+        mapping={mapping}
+        theme={lightTheme}
+      >
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <Provider store={store}>
+            <AppNavigator />
+          </Provider>
+        </View>
+      </ApplicationProvider>
     );
   }
 }
@@ -48,7 +55,7 @@ async function loadResourcesAsync() {
   ]);
 }
 
-function handleLoadingError(error: Error) {
+function handleLoadingError(error) {
   // In this case, you might want to report the error to your error reporting
   // service, for example Sentry
   console.warn(error);

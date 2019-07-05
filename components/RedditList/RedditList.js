@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { FlatList, ActivityIndicator, View, Text } from 'react-native'
+import { FlatList, ActivityIndicator, View, Text, StyleSheet } from 'react-native'
 import { getList } from '../../store/actions'
 import ListDetail from '../ListDetail'
 import moment from 'moment'
 
-const styles = {
+const styles = StyleSheet.create({
     emptyWrapper: {
         height: 300,
         alignItems: 'center',
@@ -18,7 +18,7 @@ const styles = {
     activityIndicator: {
         marginBottom: 20,
     }
-}
+})
 
 class RedditList extends React.Component {
     renderItem = ( {item} ) => (
