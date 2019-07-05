@@ -29,7 +29,7 @@ class RedditList extends React.Component {
         item.data.id
     )
 
-    componentWillMount() {
+    componentDidMount() {
         const { getList } = this.props
 
         getList()
@@ -46,7 +46,7 @@ class RedditList extends React.Component {
 
     render() {
         const { postList, loading } = this.props
-        const data = postList && postList.data.children || []
+        const data = postList && postList.data && postList.data.children || []
 
         return (
             loading ?

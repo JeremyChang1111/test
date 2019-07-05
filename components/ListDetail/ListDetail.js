@@ -38,14 +38,13 @@ class ListDetail extends React.Component {
                 >
                     <TouchableHighlight
                         style={styles.webContainer}
-                        onPress={this.onModalClose}>
+                        onPress={this.onModalClose}
+                    >
                         <Text style={styles.close}>Close</Text>
                     </TouchableHighlight>
-                    <WebView 
-                        source={this.state.postURL}
-                    />
+                    <WebView source={this.state.postURL}/>
                 </Modal>
-                <View style = {styles.avatarContainer}>
+                <View style={styles.avatarContainer}>
                     <Image style={styles.avatar} source={imageURL}/>
                 </View>
                 <View style={styles.contentContainer}>

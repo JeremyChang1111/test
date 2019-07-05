@@ -1,14 +1,22 @@
-const reducer = (state = {}, {type, payload}) => {
-    switch(type) {
-        case 'GET_LIST':
-            return {...state, loading: true}
-        case 'GET_LIST_SUCCESS':
-            return {...state, list: payload, loading: false}
-        case 'GET_LIST_FAIL':
-            return {...state, list: {}, loading: false}
-        default:
-            return state
-    }
+import { handleActions } from 'redux-actions'
+import { actionTypes } from '../actions'
+
+const initialState = {
+    list: {},
+    loading: false,
 }
 
-export default reducer
+export default handleActions({
+    [actionTypes.GET_LIST]: (state, action) => ({
+        list: {},
+        loading: true,
+    }),
+    [actionTypes.GET_LIST_SUCCESS]: (state, action) => ({
+        list: action.payload,
+        loading: false,
+    }),
+    [actionTypes.GET_LIST_FAIL]: (state, action) => ({
+        list: {},
+        loading: false,
+    }),
+}, initialState)
