@@ -38,21 +38,31 @@ class ListDetail extends React.Component {
                     animationType='fade'
                     animationDuration={600}
                 >
-                    <Button title='Close Modal' onPress={this.onModalClose}/>
                     <WebView source={this.state.postURL}/>
+                    <Button title='Close' onPress={this.onModalClose}>Close Me</Button>
                 </Modal>
-                <View style={styles.avatarContainer}>
-                    <Image style={styles.avatar} source={imageURL}/>
-                </View>
-                <View style={styles.contentContainer}>
-                    <View style={styles.date}><Text>{moment().format('YYYY-MM-DD')}</Text></View>
-                    <View style={styles.title}><Text style={styles.title} category='h5'>{data.title}</Text></View>
-                    <View style={styles.infoSection}>
-                        <View style={styles.infoItem}><Text>{ data.author }</Text></View>
-                        <View style={styles.infoItem}><Text>{ data.score }</Text></View>
-                        <View style={styles.infoItem}><Text>{ data.name }</Text></View>
+                {/* Each Item of Reddit posts - using flexbox*/}
+                <View style={styles.wrapper}>
+                    {/* Content of the left panel - image */}
+                    <View style={styles.postContainer}>
+                        <Image style={styles.post} source={imageURL}/>
                     </View>
-                </View>   
+                    {/* Content of the right panel - information of post : using flexbox*/}
+                    <View style={styles.contentContainer}>
+                        {/* Content of date info */}
+                        <View style={styles.date}><Text>Created: {moment(data.created).format('YYYY-MM-DD')}</Text></View>
+                        {/* Content of title info */}
+                        <View style={styles.title}><Text style={styles.title} numberOfLines={3} category='h5'>{data.title}</Text></View>
+                        {/* Content of Extra info: using flexbox*/}
+                        <View style={styles.infoSection}>
+                            {/* flex size: 2 for double the space*/}
+                            <View style={styles.infoAuthor}><Text>Author: { data.author }</Text></View>
+                            {/* flex size: 1 for single the space*/}
+                            <View style={styles.infoScore}><Text>Score: { data.score }</Text></View>
+                            <View style={styles.infoComment}><Text>Comments: { data.num_comments }</Text></View>
+                        </View>
+                    </View>   
+                </View>
             </TouchableOpacity>
         )
     }
@@ -62,10 +72,6 @@ const styles = StyleSheet.create({
     webContainer: {
         marginTop: 20,
     },
-    close: {
-        fontSize: 16,
-        textAlign: 'right',
-    },
     container: {
         flex: 1,
         flexDirection: 'row',
@@ -73,15 +79,21 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
     },
-    avatarContainer: {
+    postContainer: {
         width: 140,
         height: 140,
     },
-    avatar: {
+    post: {
         width: 140,
         height: 140,
         backgroundColor: '#444',
         borderRadius: 10,
+    },
+    wrapper: {  
+        backgroundColor: '#AAA',
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     contentContainer: {
         flex: 1,
@@ -94,16 +106,23 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 2,
+        height: 100,
         fontSize: 16,
     },
     infoSection: {
         flex: 1,
         flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 2,
     },
-    infoItem: {
+    infoAuthor: {
+        flex: 2,
+    },
+    infoScore: {
         flex: 1,
     },
+    infoComment: {
+        flex: 1,
+    }
 });
 
 export default ListDetail
